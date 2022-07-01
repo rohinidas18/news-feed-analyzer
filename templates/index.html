@@ -1,0 +1,170 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+    <link href="styles.css" rel="stylesheet1">
+    <title>News Feed Analyzer</title>
+</head>
+<body>
+        <nav class="navbar navbar-dark navbar-expand-sm bg-dark fixed-top p-3">
+            <div class="container">
+                <a href="/" class="navbar-brand"> News Feed Analyzer </a>
+    
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div id="navbarCollapse" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#about" class="nav-link active"> About </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#analyze" class="nav-link active"> Analyze </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#contact" class="nav-link active"> Contact </a>
+                        </li>
+                    </ul>
+                </div>    
+            </div>
+        </nav>
+  
+        <div class="bg-light rounded-3 pt-5" id="about">
+            <div class="container-fluid p-5">
+                <h1 class="display-6 fw-bold m-3">Analyze your Feed</h1>
+                <p class="col-md-8 fs-4 m-3 py-2">Powered by an NLP Model, this classifier will analyze the sentiment of your News Feed 
+                                             for the Industries of your choice with just a click.</p>
+                <p class="col-md-8 fs-4 m-3">Scroll down below, to see how it works.</p>
+            </div>
+        </div>
+
+
+        <div class="row align-items-md-stretch px-5 py-2 m-2" id="analyze">
+            <div class="col-md-6">
+              <div class="h-100 p-5 text-white bg-dark rounded-3">
+                <h2>Run the Analyzer</h2>
+                <p>Click the button below to start the model. Once the results are ready, you can select from the Industries for your choice.</p>
+                <form action="" method="post">
+                  {% csrf_token %}
+                  <input class="btn btn-outline-light" type="submit" name="update" value="Go!">
+                </form>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="h-100 p-5 bg-light border rounded-3">
+                <h2>Specify your Industry</h2>
+                <p>Choose any one from the available Industries, or view all.</p>
+
+
+                <div class="dropdown">
+                  <form method="post"> 
+                    {% csrf_token %}
+                      <select id="select" name='select' class="form-select w-50 mt-4" aria-label="Default select example" onchange='if(this.value != 0) { this.form.submit(); }'>
+                        <option value="none" selected disabled hidden> Select </option>
+                        <option value='--View All--'>--View All--</option>
+                        <option value='HERO MOTOCORP LTD.'>HERO MOTOCORP LTD.</option>
+                        <option value='Srikalahasthi Pipes Limited'>Srikalahasthi Pipes Limited</option>
+                        <option value='FORCE MOTORS LTD.'>FORCE MOTORS LTD.</option>
+                        <option value='HINDUSTAN CONSTRUCTION CO.LTD.'>HINDUSTAN CONSTRUCTION CO.LTD.</option>
+                        <option value='ABB India Limited'>ABB India Limited</option>
+                        <option value='KINETIC ENGINEERING LTD'>KINETIC ENGINEERING LTD</option>
+                        <option value='USHA MARTIN LTD.'>USHA MARTIN LTD.</option>
+                        <option value='MAHINDRA & MAHINDRA LTD.'>MAHINDRA & MAHINDRA LTD.</option>
+                        <option value='MAHARASHTRA SEAMLESS LTD.'>MAHARASHTRA SEAMLESS LTD.</option>
+                        <option value='BHARAT HEAVY ELECTRICALS LTD.'>BHARAT HEAVY ELECTRICALS LTD.</option>
+                        <option value='LML LTD.'>LML LTD.</option>
+                        <option value='ELECTROTHERM (INDIA) LTD.'>ELECTROTHERM (INDIA) LTD.</option>
+                        <option value='MARUTI SUZUKI INDIA LTD.'>MARUTI SUZUKI INDIA LTD.</option>
+                        <option value='NCC Limited'>NCC Limited</option>
+                        <option value='THERMAX LTD.'>THERMAX LTD.</option>
+                        <option value='MAJESTIC AUTO LTD.'>MAJESTIC AUTO LTD.</option>
+                        <option value='MSP STEEL & POWER LTD.'>MSP STEEL & POWER LTD.</option>
+                        <option value='BEML LTD.'>BEML LTD.</option>
+                        <option value='JINDAL SAW LTD.'>JINDAL SAW LTD.</option>
+                        <option value='ATLAS CYCLES (HARYANA) LTD.'>ATLAS CYCLES (HARYANA) LTD.</option>
+                      </select>  
+                  </form>                
+                </div>
+              </div>
+            </div>
+          </div>
+         
+          <div class="table-responsive p-5">
+            <h2 class="mb-4 px-3">Results</h2>
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th scope="col" data-field="index">Index</th>
+                  <th scope="col" data-field="company_name">Industry Name</th>
+                  <th scope="col" data-field="news">News Article</th>
+                  <!-- <th scope="col" data-field="link">Link</th> -->
+                  <th scope="col" data-field="Sentiment_TfIdf">Sentiment</th>
+                </tr>
+              </thead>
+              <tbody>
+                  
+                  {{index|json_script:"id"}}
+                  {{company_name|json_script:"cmp"}}
+                  {{news|json_script:"nw"}}
+                  {{Sentiment_TfIdf|json_script:"tf"}}
+
+                  <script>
+                    const ids = JSON.parse(document.getElementById('id').textContent);
+                    const cmps = JSON.parse(document.getElementById('cmp').textContent);
+                    const nws = JSON.parse(document.getElementById('nw').textContent);
+                    const tfs = JSON.parse(document.getElementById('tf').textContent);
+                    var tbd = document.querySelector('tbody');
+
+                    for(var i in ids)
+                      tbd.innerHTML += `<tr>
+                                          <td>${ids[i]+1}</td>
+                                          <td>${cmps[i]}</td>
+                                          <td>${nws[i]}</td>
+                                          <td>${tfs[i]}</td>
+                                        </tr>`;
+
+                  </script>
+              </tbody>
+            </table>
+          </div>
+
+        <div class="container" id="contact">
+            <footer class="row justify-content-md-center py-5 my-5 border-top">
+              
+                <div class="col">
+                <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+                  <svg class="bi me-2" width="40" height="32"></svg>
+                </a>
+                <p class="text-muted">© 2022 - Rohini</p>
+              </div>
+
+              <div class="col-md-auto">
+                <h5>Contact</h5>
+                <ul class="nav flex-column">
+                  <li class="nav-item mb-2"><a href="https://www.linkedin.com/in/rohini-das098" class="nav-link p-0 text-muted">LinkedIn</a></li>
+                  <li class="nav-item mb-2"><a href="mailto: das.rohini@outlook.com" class="nav-link p-0 text-muted">Mail</a></li>
+                </ul>
+              </div>
+
+              <div class="col col-lg-2">
+                <h5>Futher Information</h5>
+                <ul class="nav flex-column">
+                  <li class="nav-item mb-2"><a href="https://github.com/rohinidas18" class="nav-link p-0 text-muted">GitHub</a></li>
+                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Full Report</a></li>
+                </ul>
+              </div>
+            </footer>
+          </div>
+    
+</body>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</html>
