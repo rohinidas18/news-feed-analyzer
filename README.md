@@ -3,7 +3,7 @@ A web-app that performs sentiment analysis of web-scrapped industrial news.
 
 Dependencies
 
-  The site-packages required are:
+ - Some important site-packages required are:
   
         - nltk==3.7
         - GoogleNews==1.6.4
@@ -18,6 +18,6 @@ Dependencies
         - sqlalchemy==1.4.38 (create_engine, urllib)
         - mssql_django==1.1.3
  
-  Libraries:
-    Django v4.0.5
-    Python v3.8.0
+ - Libraries:
+    - Django v4.0.5
+    - Python v3.8.0
