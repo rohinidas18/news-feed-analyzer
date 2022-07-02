@@ -4,7 +4,6 @@ A web-app that performs sentiment analysis of web-scrapped industrial news.
 Dependencies
 
  - Some important site-packages required are:
-  
         - nltk==3.7
         - GoogleNews==1.6.4
         
