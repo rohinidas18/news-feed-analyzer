@@ -28,3 +28,9 @@ A web-app that performs sentiment analysis of web-scrapped industrial news.
     - One can run the scraper from the frontend to create a news feed, and simultaneously run the model for classifying the news articles.
     - Final results can be viewed by selecting options which displays the respective tables.
 
+## How to run ##
+
+Activate the virtual environment, followed by the command: ```python manage.py runserver```
+
+
+<sub> Made for an ML Internship -- Sophomore Year </sub>
