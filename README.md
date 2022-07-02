@@ -1,7 +1,7 @@
-# news-feed-analyzer
+# news-feed-analyzer #
 A web-app that performs sentiment analysis of web-scrapped industrial news.
 
-Dependencies
+## Dependencies ##
 
  - Some important site-packages required are:
     - nltk==3.7
@@ -18,3 +18,5 @@ Dependencies
  - Libraries:
     - Django v4.0.5
     - Python v3.8.0
+
+## Description ##
