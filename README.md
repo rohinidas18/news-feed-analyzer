@@ -31,6 +31,3 @@ A web-app that performs sentiment analysis of web-scrapped industrial news.
 ## How to run ##
 
 Activate the virtual environment, followed by the command: ```python manage.py runserver```
-
-
-<sub> Made for an ML Internship -- Sophomore Year </sub>
